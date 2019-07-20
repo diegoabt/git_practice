@@ -1,0 +1,288 @@
+%% Poster template using tikzposter
+%% see https://ctan.org/pkg/tikzposter  for a manual
+%% and https://www.sharelatex.com/templates/53332341910d975953dffdab/v/1/pdf for an example
+%% We (see MPIISstyle for authors) added some commands to this to make it even more convinient
+
+\documentclass[a0paper,portrait]{tikzposter}
+%\documentclass[a0paper,landscape]{tikzposter} % change paper layout/size
+
+\usepackage{calc}
+\usepackage{lipsum}
+\usepackage[numbers, sort&compress, square]{natbib}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{enumitem}
+% %if you need algorithm do this:
+% \usepackage{algorithm}
+% \usepackage{algorithmic}
+% \usepackage{etoolbox}
+% \AtBeginEnvironment{algorithm}{
+%   \setlength{\columnwidth}{\linewidth}
+% }
+
+\usepackage[fontscale=0.9]{MPIISposter}
+% in addition to the standard latex font sizes we have now also \veryHuge, \VeryHuge, and \VERYHuge
+% there is a command
+% \fontscale{factor} to scale all fonts
+
+\usetitlestyle{Empty}
+%% here you can change the way to boxed look like, see
+%% https://bitbucket.org/surmann/tikzposter/downloads/styleguide.pdf
+\useblockstyle{Envelope}
+
+ %% add your color scheme in this file!
+\input{color_definition_mpg_is.tex}
+\usecolorstyle{MPI_rg} % load the respective color scheme
+%\usecolorstyle{MPI_ei}
+
+% there is a colorize command that make text appear in the primary color
+% you might want to change it if your primary color is very light (here mixed with black 1:1)
+%\renewcommand{\colorize}[1]{{\color{blocktitlebgcolor!50!black}\bf #1}}
+
+\newcommand{\PosterDepartment}{Max Planck Institute for Intelligent Systems -- Autonomous Learning Group}
+\newcommand{\PosterTitle}{Alternative poster template\\ for SAB 2019}
+\newcommand{\PosterAuthor}{Author1, Author2, and Author3}
+\renewcommand{\PosterFooter}{al.is.tuebingen.mpg.de}
+
+
+\renewcommand{\familydefault}{\sfdefault}
+\title{\PosterTitle}
+\author{\PosterAuthor}
+
+\settitle{
+  \vbox to 0.187\paperwidth { % only for SAB to have them all the same height!
+    \vspace{1.7cm}
+    % \vbox to 0.112\paperwidth { % only for SAB (for landscape)
+    % \vspace{2cm}
+
+  \begin{center}
+    \color{titlefgcolor}
+    {\Huge\PosterDepartment\\[0.3em]} % adjust spacing depending on whether you have two rows somewhere
+    {\VERYHuge \bfseries \PosterTitle\\[0.3em]}
+    {\huge \PosterAuthor\\}
+    \null
+  \end{center}}
+}
+
+\begin{document}
+\maketitle[titletotopverticalspace=0cm,titletoblockverticalspace=1.5cm]
+%% decide about black or white Minerva
+\addlogoright{logos/Max-Planck-Gesellschaft-white}
+%\addlogoright{logos/Max-Planck-Gesellschaft-black}
+
+%% you can add another logo to the left or shift it inwards if you want
+% \addlogoleft{yourlogo}
+% \addlogoright[5cm]{yourlogo}
+\posterfooter
+
+\begin{columns}
+  \column{0.5}
+
+  \specialblock{Overview}{
+
+    \colorize{\bf Our goal:}
+    Provide an easy to use poster template with:
+    \begin{itemize}
+    \item easy to change color schemes
+    \item proper title area scaling
+    \item arbitrary paper size
+    \end{itemize}
+    \s{.5}
+  }
+
+  \block{Commands}{
+    \colorize{\bf Some nifty features:}
+    Here are some of the commands we added to make life easier:
+    \begin{enumerate} % verb// does not work inside of block
+    \item {\tt fontscale} argument allows to scale all fonts (easy to refit poster)
+    \item {\tt \textbackslash{}colorize\{test\}} makes text \colorize{colored} (automatically fitting to box color)
+    \item {\tt \textbackslash{}s\{X\}} create a vertical space in units of em (relative to fontsize)
+    \item {\tt cols} environment creating a multicolumn inside a box
+      with {\tt \textbackslash{}col\{0.5\}} creating a new column with relative size
+    \item {\tt \textbackslash{}ig[relsize]\{img\}} short for includegraphics with relative width to column (default 1.0)
+    \end{enumerate}%
+
+    \innerblock{interesting}{
+
+      Normal text or \colorize{colorized text}
+    }
+
+    \s{1} % add some spacing
+    \innerblock{}{
+      box without header
+    }
+
+    \s{1}
+    placing pics works great with cols environment (like in beamer with columns)
+    \s{1}
+
+    \begin{cols}
+      \col{.4}
+      \ig{logos/Max-Planck-Gesellschaft-black}
+      \col{.2} \centering
+      some text in between
+      \col{.4}
+      \ig{logos/Max-Planck-Gesellschaft-black}
+
+    \end{cols}
+  }
+
+  % COLUMN 2
+  % ---------------------------------------------------------------------------
+  \column{0.5}
+
+  \block{title}{
+    \lipsum
+  }
+
+  \specialblock{Conclusion}{
+    Have fun designing your poster\dots
+  }
+
+  \block{}{
+    % use bibtex here
+    % \nocite*  % use this to force all entries in the bibfile to go here
+    % \bibliography{mybib}
+    % or the manual entries (can be copied from .bbl files in case you have used bibtex on a document)
+    \setlength{\bibsep}{.5em}
+    \begin{thebibliography}{1}
+
+    \bibitem{Repo}
+      Georg Martius and Dominik Zietlow.
+      \newblock New MPI-IS poster style
+      \newblock \url{https://gitlab.tuebingen.mpg.de/gmartius/posterstyle}, 2019
+
+    \bibitem{tikzpackage}
+      Richard Barnard, Elena Botoeva, Pascal Richter, and Dirk Surmann.
+      \newblock tikzposter -- Create scientific posters using TikZ.
+      \newblock \url{https://ctan.org/pkg/tikzposter}, 2014.
+
+    \bibitem{usingtikz}
+      Richard Barnard, Elena Botoeva, Pascal Richter, and Dirk Surmann.
+      \newblock Using Tikzposter.
+      \newblock \url{https://www.sharelatex.com/templates/53332341910d975953dffdab/v/1/pdf},
+
+    \end{thebibliography}
+  }
+
+\end{columns}
+
+\end{document}
+
+
+
+\documentclass[a0paper,portrait]{tikzposter}
+%\documentclass[a0paper,landscape]{tikzposter}
+\usepackage{calc}
+\usepackage{lipsum}
+\usepackage[numbers, sort&compress, square]{natbib}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{enumitem}
+
+\usepackage[fontscale=0.9]{MPIISposter}
+% in addition to the standard latex font sizes we have now also \veryHuge, \VeryHuge, and \VERYHuge
+% there is a command
+% \fontscale{factor} to scale all fonts
+
+\usetitlestyle{Empty}
+\useblockstyle{Envelope}
+\input{color_definition_mpg_is.tex} % add your color scheme in this file
+\usecolorstyle{MPI_rg}
+%\usecolorstyle{MPI_ei}
+
+%\renewcommand{\colorize}[1]{{\color{blocktitlebgcolor}\bf #1}}
+
+\newcommand{\PosterDepartment}{Max Planck Institute for Intelligent Systems -- Autonomous Learning Group}
+\newcommand{\PosterFooter}{al.is.tuebingen.mpg.de}
+\newcommand{\PosterTitle}{ This is a Title}
+\newcommand{\PosterAuthor}{Author1, Author2, \\[.2em]and Author3}
+
+\renewcommand{\familydefault}{\sfdefault}
+\title{\PosterTitle}
+\author{\PosterAuthor}
+
+\settitle{
+  \vbox to 0.187\paperwidth { % only for SAB to have them all the same height!
+    \vspace{2cm}
+    % \vbox to 0.112\paperwidth { % only for SAB (for landscape)
+    % \vspace{2cm}
+
+  \begin{center}
+    \color{titlefgcolor}
+    {\Huge\PosterDepartment\\[0.5em]} % adjust here depending on whether you have two rows somewhere
+    {\VERYHuge \bfseries \PosterTitle\\[0.3em]}
+    {\huge \PosterAuthor\\}
+    \null
+  \end{center}}
+}
+
+\usepackage[skins]{tcolorbox}
+
+
+\begin{document}
+\maketitle[titletotopverticalspace=0cm,titletoblockverticalspace=1.5cm]
+\addlogo{logos/Max-Planck-Gesellschaft-white}
+%\addlogo{logos/Max-Planck-Gesellschaft-black}
+\posterfooter
+
+
+\begin{columns}
+  \column{0.5}
+
+
+  \specialblock{Overview}{
+    \colorize{\bf Our goal:}
+    We seek reinforcement learning (RL) algorithms that are capable of
+    \begin{itemize}
+    \item Efficiently self-exploring with little or no external reward
+    \item Quickly transferring to new environments (development/lifelong learning)
+    \end{itemize}
+    \s{.5}
+
+    \colorize{\bf Our interests:}
+    Along the way of working towards the goal, we are interested in
+    \begin{itemize}
+    \item Make dynamics modelling precise and extrapolate using machine learning
+    \item Study unsupervised representation learning
+    \item Tackle the long-standing exploration problem in RL
+    \item Study learning to learn methods in RL
+    \item Improve the life of our robot friend: Poppy
+    \end{itemize}%
+  }
+
+  \block{some more stuff}{
+
+    \innerblock{interesting}{
+
+      Normal text or \colorize{colorized text}
+    }
+
+    \s{1} % add some spacing
+    \innerblock{}{
+      box without header
+    }
+
+    placing pics works great with cols environment (like in beamer with columns)
+    \begin{cols}
+      \col{.4}
+      \ig{logos/Max-Planck-Gesellschaft-black}
+      \col{.4}
+      \ig{logos/Max-Planck-Gesellschaft-black}
+
+    \end{cols}
+  }
+
+  % COLUMN 2
+  % ---------------------------------------------------------------------------
+  \column{0.5}
+
+  \block{title}{
+    \lipsum
+  }
+
+\end{columns}
+
+\end{document}

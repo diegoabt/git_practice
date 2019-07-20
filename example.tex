@@ -1,0 +1,323 @@
+%% Poster template using tikzposter
+%% see https://ctan.org/pkg/tikzposter  for a manual
+%% and https://www.sharelatex.com/templates/53332341910d975953dffdab/v/1/pdf for an example
+%% We (see MPIISstyle for authors) added some commands to this to make it even more convinient
+
+%\documentclass[a0paper,portrait]{tikzposter}
+\documentclass[a0paper,landscape]{tikzposter} % change paper layout/size
+%% If you want a custom paper size use the following. Note that our printer has 106.7cm wide paperroll
+%% If you have to print to the margin leave some space to cut it.
+%% This would be a large landscape poster
+%\documentclass[landscape]{tikzposter}
+% \geometry{paperheight=140cm,paperwidth=104cm} % for landscape width and height are swapped
+
+\usepackage{calc}
+\usepackage{lipsum}
+\usepackage[numbers, sort&compress, square]{natbib}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{enumitem}
+ \usepackage{relsize}
+% %if you need algorithm do this:
+% \usepackage{algorithm}
+% \usepackage{algorithmic}
+% \usepackage{etoolbox}
+% \AtBeginEnvironment{algorithm}{
+%   \setlength{\columnwidth}{\linewidth}
+% }
+
+\usepackage[fontscale=1]{MPIISposter}
+% in addition to the standard latex font sizes we have now also \veryHuge, \VeryHuge, and \VERYHuge
+% there is a command
+% \fontscale{factor} to scale all fonts
+
+\usetitlestyle{Empty}
+%% here you can change the way to boxed look like, see
+%% https://bitbucket.org/surmann/tikzposter/downloads/styleguide.pdf
+\useblockstyle{Envelope}
+
+ %% add your color scheme in this file!
+\input{color_definition_mpg_is.tex}
+\usecolorstyle{MPI_rg} % load the respective color scheme
+%\usecolorstyle{MPI_ei}
+
+% there is a colorize command that make text appear in the primary color
+% you might want to change it if your primary color is very light (here mixed with black 1:1)
+%\renewcommand{\colorize}[1]{{\color{blocktitlebgcolor!50!black}\bf #1}}
+
+\newcommand{\PosterDepartment}{Max Planck Institute for Intelligent Systems -- Autonomous Learning Group}
+\newcommand{\PosterTitle}{ This is a Title}
+\newcommand{\PosterAuthor}{Author1, Author2, and Author3}
+\renewcommand{\PosterFooter}{al.is.tuebingen.mpg.de}
+
+
+\renewcommand{\familydefault}{\sfdefault}
+\title{\PosterTitle}
+\author{\PosterAuthor}
+
+\settitle{
+  \s{1.5}
+  \begin{center}
+    \color{titlefgcolor}
+    {\Huge\PosterDepartment\\[0.5em]} % adjust here depending on whether you have two rows somewhere
+    {\VERYHuge \bfseries \PosterTitle\\[0.3em]}
+    {\huge \PosterAuthor\\[.5em]}
+  \end{center}
+  \null
+}
+
+\begin{document}
+\maketitle[titletotopverticalspace=0cm,titletoblockverticalspace=1.5cm]
+%% decide about black or white Minerva
+%% BTW: the Minerva looking into the poster is nicer than if she looks out, so on the left
+\addlogoleft{logos/Max-Planck-Gesellschaft-white}
+% \addlogoleft{logos/Max-Planck-Gesellschaft-black}
+
+%% you can add another logo and shift it inwards if you want
+%\addlogoright[5cm]{yourlogo}
+
+\posterfooter
+
+
+\begin{columns}
+  \column{0.33}
+
+  \specialblock{Discrete case}{
+        \colorize{The model:}
+        Let $G=(E,V)$ be graph. The Physarum Polycephalum adaptative model is
+        \begin{myequations}
+            \begin{align}
+              & \underset{e\in \sigma(v)}{\sum}Q_e(t)=f_v,  \\
+                &Q_e(t)=D_e(t)\dfrac{p_u(t)-p_v(t)}{L_e}  &\forall e\in E, \\
+                &D'_e(t)=|Q_e(t)|^\beta-D_e(t) &\forall e\in E,
+            \end{align}
+        \end{myequations}
+        
+        \s{1.5}
+       \begin{cols}
+      \col{.5}
+\innerblock{The parameters:}{
+\s{.5}
+\begin{enumerate}
+    \item $f$ models the location of the food,
+    \item $Q$ represents the flux through the slime mold edges,
+    \item $D$ \textbf{is the capacity of the edges,}
+    \item $p$ \textbf{is the pressure in the nodes,}
+\end{enumerate}
+\s{.5}
+    }
+      \s{.5}
+      \innerblock{The problem:}{
+\s{.5}
+
+For each $t$, find a pair of functions  $D_e(t)$ and $p_v(t)$  that satisfies the PP equations.
+\s{.5}
+    }
+    \s{.5}
+\col{.4} 
+\vspace{-.5}
+\ig{pics/PP}
+\s{.2}
+\small{Tero, A., Kobayashi, R., & Nakagaki, T. (2007). \textbf{A mathematical model for adaptive transport network in path finding by true slime mold}. Journal of theoretical biology, 244(4), 553-564.}
+    \end{cols} 
+        
+            \s{.3}
+  }
+
+  \block{Continuous case}{
+    % \colorize{\bf Some nifty features:}
+    % Here are some of the commands we added to make life easier:
+    % \begin{enumerate} % verb// does not work inside of block
+    % \item {\tt fontscale} argument allows to scale all fonts (easy to refit poster)
+    % \item {\tt \textbackslash{}colorize\{test\}} makes text \colorize{colored} (automatically fitting to box color)
+    % \item {\tt \textbackslash{}s\{X\}} create a vertical space in units of em (relative to fontsize)
+    % \item {\tt cols} environment creating a multicolumn inside a box
+    %   with {\tt \textbackslash{}col\{0.5\}} creating a new column with relative size
+    % \item {\tt \textbackslash{}ig[relsize]\{img\}} short for includegraphics with relative width to column (default 1.0)
+    % \end{enumerate}%
+
+    % \innerblock{interesting}{
+
+    %   Normal text or \colorize{colorized text}
+    % }
+
+    % \s{1} % add some spacing
+    % \innerblock{}{
+    %   box without header
+    % }
+
+    % \s{1}
+    % placing pics works great with cols environment (like in beamer with columns)
+    % \s{1}
+
+\colorize{The model:}
+
+The \textit{DMK} equations:
+\begin{subequations}\label{eq:2}
+    \begin{align}
+&-\text{div}\left( \mu (t,x) \nabla u(t,x)\right)=f^+(x)-f^-(x)\\
+         &\partial_t \mu(t,x)=\left(\mu(t,x)\nabla u(t,x)\right)^\beta-k(x)d(t)\mu^\alpha(t,x)
+  \end{align}
+\end{subequations}
+
+complemented by zero Neumann boundary conditions. 
+
+
+\s{1.5}
+\begin{cols}
+      \col{.4}
+\innerblock{The parameters:}{
+\s{.5}
+\begin{enumerate}
+    \item $f^+$ models the source
+    \item $f^-$ corresponds to the sink
+    \item  $k$ controls the barriers in the domain
+    \item $d$ represents the decay 
+    \item $\mu$ \textbf{is the transport density}
+    \item $u$ \textbf{is called the potential }
+\end{enumerate}
+\s{.5}
+    }
+      
+      \col{.4} 
+      \innerblock{The problem:}{
+\s{.5}
+
+Find 
+\vspace{-1}
+$$\mu:[0,+\infty)\rightarrow  \mathbb{R}^+,$$
+$$u :\Omega\rightarrow  \mathbb{R}^d,$$
+
+satisfying the  \textit{DMK} equations.
+\s{.5}
+    }
+    \s{.5}
+% \innerblock{The problem:}{
+% \s{.5}
+% IMG
+% \s{1.5}
+%     }
+     \end{cols}
+
+ \s{1.}
+
+}
+
+  % COLUMN 2
+  % ---------------------------------------------------------------------------
+  \column{0.33}
+
+  \block{Questions}{
+  \begin{itemize}
+      \item How the initial conditions of the DMK equations influence on the solution?
+      \item How can we translate different solutions into a graph representation?
+      \item Which are the topological properties of the optimal graphs?
+  \end{itemize}
+  \innerblock{Goals}{
+\s{.5}
+\begin{itemize}
+    \item  To translate the solution pair $(\mu, u)$ into a network framework
+    \item To characterize the topologies associated to this novel representation
+\end{itemize}
+}
+}
+
+  \specialblock{Current step:}{
+
+\innerblock{}{A \textit{delta} initial density and different approximations of the solution:}
+\s{.5}
+    \begin{cols}
+      \col{.32}
+      \ig{pics/Poster_1.png}
+      \col{.32} \centering
+      \ig{pics/poster_2.png}
+      \col{.32}
+      \ig{pics/poster_3.png}
+
+    \end{cols}
+    
+ \innerblock{}{The three graph representations of the solution:} 
+    \begin{cols}
+      \col{.3}
+      \ig{pics/Graph_1_delta_1.png}
+      \col{.3} \centering
+     \ig{pics/Graph_2_delta_1.png}
+      \col{.3}
+       \ig{pics/Graph_3_delta_1.png}
+
+    \end{cols}
+    
+    
+\innerblock{}{A \textit{parabolic} initial density and different approximations of the solution:}
+\s{.5}
+    \begin{cols}
+      \col{.32}
+      \ig{pics/Poster_4.png}
+      \col{.32} \centering
+      \ig{pics/poster_5.png}
+      \col{.32}
+      \ig{pics/poster_6.png}
+
+    \end{cols}
+    
+
+    
+  }
+  % COLUMN 3
+  % ---------------------------------------------------------------------------
+   \column{0.33}
+   
+   \specialblock{}{  
+     \innerblock{}{The three graph representations of the solution:} 
+    \begin{cols}
+      \col{.3}
+      \ig{pics/Graph_1_parabola.png}
+      \col{.3} \centering
+     \ig{pics/Graph_2_parabola.png}
+      \col{.3}
+       \ig{pics/Graph_3_parabola.png}
+
+    \end{cols}    
+    
+   
+
+}
+ \specialblock{Future Steps}{
+   \begin{itemize}
+       \item Enhancing the graph representations by removing non-optimal structures
+       \item Analysing such refined networks in terms of different metrics 
+       \item Improving the DMK solver by exploiting these characterizations
+   \end{itemize}
+  }
+
+
+  \block{}{
+    % use bibtex here
+    % \nocite*  % use this to force all entries in the bibfile to go here
+    % \bibliography{mybib}
+    % or the manual entries (can be copied from .bbl files in case you have used bibtex on a document)
+    \setlength{\bibsep}{.5em}
+    \begin{thebibliography}{1}
+
+    \bibitem{Repo}
+      Facca, E., Cardin, F., & Putti, M. (2018).
+      \newblock Towards a Stationary Monge--Kantorovich Dynamics: The Physarum Polycephalum Experience.
+      \newblock SIAM Journal on Applied Mathematics, 78(2), 651-676.
+
+    \bibitem{tikzpackage}
+      Richard Barnard, Elena Botoeva, Pascal Richter, and Dirk Surmann.
+      \newblock tikzposter -- Create scientific posters using TikZ.
+      \newblock \url{https://ctan.org/pkg/tikzposter}, 2014.
+
+    \bibitem{usingtikz}
+      Richard Barnard, Elena Botoeva, Pascal Richter, and Dirk Surmann.
+      \newblock Using Tikzposter.
+      \newblock \url{https://www.sharelatex.com/templates/53332341910d975953dffdab/v/1/pdf},
+
+    \end{thebibliography}
+  }
+
+\end{columns}
+
+\end{document}
